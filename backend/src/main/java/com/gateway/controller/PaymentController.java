@@ -7,7 +7,11 @@ import com.gateway.model.Order;
 import com.gateway.service.OrderService;
 import com.gateway.service.PaymentService;
 import com.gateway.util.PaymentUtils;
+
+import java.util.stream.Collectors;
+
 import org.springframework.web.bind.annotation.*;
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/payments")
@@ -57,5 +61,14 @@ public class PaymentController {
                 paymentService.getPaymentForMerchant(paymentId, merchant)
         );
     }
+    // NEW: GET /api/v1/payments → list all payments for authenticated merchant
+    @GetMapping
+    public List<PaymentResponse> listPayments(@RequestAttribute("merchant") Merchant merchant) {
+        return paymentService.getPaymentsForMerchant(merchant)
+                            .stream()
+                            .map(PaymentResponse::from)
+                            .collect(Collectors.toList());
+    }
+
 
 }

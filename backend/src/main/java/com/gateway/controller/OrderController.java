@@ -6,10 +6,13 @@ import com.gateway.model.Merchant;
 import com.gateway.model.Order;
 import com.gateway.service.OrderService;
 import jakarta.validation.Valid;
+
+import java.util.stream.Collectors;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
-
+import java.util.List;
 @RestController
 @RequestMapping("/api/v1/orders")
 public class OrderController {
@@ -49,4 +52,13 @@ public class OrderController {
                         )
                 );
     }
+    // NEW: GET /api/v1/orders → list all orders for authenticated merchant
+        @GetMapping
+        public List<OrderResponse> listOrders(@RequestAttribute("merchant") Merchant merchant) {
+        return orderService.getOrdersForMerchant(merchant)
+                        .stream()
+                        .map(OrderResponse::from)
+                        .collect(Collectors.toList());
+        }
+
 }

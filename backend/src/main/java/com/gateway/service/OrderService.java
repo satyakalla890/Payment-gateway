@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import java.security.SecureRandom;
 import java.util.Optional;
+import java.util.List;
 
 
 
@@ -53,4 +54,7 @@ public class OrderService {
                 .findById(orderId)
                 .orElseThrow(() -> new RuntimeException("Order not found"));
     }
+    public List<Order> getOrdersForMerchant(Merchant merchant) {
+    return orderRepository.findByMerchant(merchant);
+}
 }

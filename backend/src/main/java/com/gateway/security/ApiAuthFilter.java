@@ -28,13 +28,15 @@ public class ApiAuthFilter extends OncePerRequestFilter {
 
         String path = request.getRequestURI();
 
-        // Allow /health and public checkout endpoints
-        if (path.startsWith("/health")
+        // Allow OPTIONS (CORS preflight) + health + public
+        if ("OPTIONS".equalsIgnoreCase(request.getMethod())
+                || path.startsWith("/health")
                 || path.startsWith("/public")
                 || path.startsWith("/api/v1/test")) {
             filterChain.doFilter(request, response);
             return;
         }
+
 
 
         String apiKey = request.getHeader("X-Api-Key");
@@ -58,6 +60,7 @@ public class ApiAuthFilter extends OncePerRequestFilter {
             return;
         }
 
+        request.setAttribute("merchant", merchant);
         // Continue filter chain
         filterChain.doFilter(request, response);
     }

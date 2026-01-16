@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import com.gateway.config.TestModeConfig;
 
 import java.security.SecureRandom;
+import java.util.List;
 
 @Service
 public class PaymentService {
@@ -83,4 +84,8 @@ public class PaymentService {
                 .findByIdAndMerchant(paymentId, merchant)
                 .orElseThrow(() -> new RuntimeException("Payment not found"));
     }
+    public List<Payment> getPaymentsForMerchant(Merchant merchant) {
+        return paymentRepository.findByMerchant(merchant);
+    }
+
 }
