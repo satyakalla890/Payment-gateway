@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import "./styles.css";
 
 const API_URL = process.env.REACT_APP_API_URL || "http://api:8000";
 
@@ -131,7 +132,8 @@ function Checkout() {
   if (!order) return <p>Loading order...</p>;
 
   return (
-    <div style={{ padding: "40px", fontFamily: "Arial" }}>
+    <div className="checkout-container">
+
       <h2>Checkout</h2>
 
       <p><b>Order ID:</b> {order.id}</p>
@@ -150,7 +152,7 @@ function Checkout() {
 
           {method === "upi" && (
             <div>
-              <input
+              <input className="input"
                 placeholder="example@upi"
                 value={upiId}
                 onChange={e => setUpiId(e.target.value)}
@@ -160,17 +162,17 @@ function Checkout() {
 
           {method === "card" && (
             <div>
-              <input
+              <input className="input"
                 placeholder="Card Number"
                 value={card.number}
                 onChange={e => setCard({ ...card, number: e.target.value })}
               />
-              <input
+              <input className="input"
                 placeholder="MM/YY"
                 value={card.expiry}
                 onChange={e => setCard({ ...card, expiry: e.target.value })}
               />
-              <input
+              <input className="input"
                 placeholder="CVV"
                 type="password"
                 value={card.cvv}
@@ -180,7 +182,7 @@ function Checkout() {
           )}
 
           {method && (
-            <button onClick={submitPayment} style={{ marginTop: 20 }}>
+            <button className="primary-btn" onClick={submitPayment}>
               Pay Now
             </button>
           )}
@@ -188,11 +190,11 @@ function Checkout() {
       )}
 
       {status === "processing" && <p>⏳ Processing payment...</p>}
-      {status === "success" && <p style={{ color: "green" }}>✅ Payment Successful</p>}
+      {status === "success" && <p className="success">✅ Payment Successful</p>}
       {status === "failed" && (
         <>
-          <p style={{ color: "red" }}>❌ Payment Failed</p>
-          <button onClick={() => {
+          <p className="error">❌ Payment Failed</p>
+          <button className="primary-btn" onClick={() => {
             setStatus("idle");
             setPaymentId(null);
             setError(null);
