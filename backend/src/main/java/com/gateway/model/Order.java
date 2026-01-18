@@ -3,7 +3,6 @@ package com.gateway.model;
 import jakarta.persistence.*;
 import java.time.Instant;
 
-
 @Entity
 @Table(name = "orders")
 public class Order {
@@ -25,9 +24,6 @@ public class Order {
     @Column(length = 255)
     private String receipt;
 
-    @Column(columnDefinition = "jsonb")
-    private String notes;
-
     @Column(length = 20)
     private String status = "created";
 
@@ -48,7 +44,8 @@ public class Order {
         this.updatedAt = Instant.now();
     }
 
-    // Getters & Setters
+    // ===== Getters & Setters =====
+
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
@@ -64,18 +61,9 @@ public class Order {
     public String getReceipt() { return receipt; }
     public void setReceipt(String receipt) { this.receipt = receipt; }
 
-    public String getNotes() { return notes; }
-    public void setNotes(String notes) { this.notes = notes; }
-
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
 
-    public Instant getCreatedAt() {
-    return createdAt;
-}
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
+    public Instant getCreatedAt() { return createdAt; }
+    public Instant getUpdatedAt() { return updatedAt; }
 }

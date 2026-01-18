@@ -32,8 +32,7 @@ public class OrderController {
                 merchant,
                 request.getAmount(),
                 request.getCurrency(),
-                request.getReceipt(),
-                request.getNotes()
+                request.getReceipt()
         );
     }
 

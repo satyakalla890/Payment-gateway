@@ -28,18 +28,24 @@ public class OrderService {
         this.orderRepository = orderRepository;
     }
 
-    public Order createOrder(Merchant merchant, int amount, String currency, String receipt, String notes) {
+    public Order createOrder(
+            Merchant merchant,
+            int amount,
+            String currency,
+            String receipt
+    ) {
         Order order = new Order();
         order.setId(generateOrderId());
         order.setMerchant(merchant);
         order.setAmount(amount);
         order.setCurrency(currency == null ? "INR" : currency);
         order.setReceipt(receipt);
-        order.setNotes(notes);
         order.setStatus("created");
 
         return orderRepository.save(order);
     }
+
+
 
     private String generateOrderId() {
         SecureRandom random = new SecureRandom();
