@@ -3,12 +3,50 @@
 A Dockerized payment gateway system with order management, payment processing,
 webhooks, retry logic, and a real-time dashboard.
 
+## Overview
+A Dockerized payment gateway system with:
+- Merchant dashboard
+- Order creation
+- Checkout flow
+- Payment processing
+- Status polling
+- Retry support
+
+The project is split into:
+- Backend (Spring Boot)
+- Dashboard frontend
+- Checkout frontend (isolated)
+
+---
+
+## Architecture
+
+Browser
+├── Dashboard (React) → localhost:3000
+│ ├── Health
+│ ├── Transactions
+│ └── Opens Checkout
+│
+├── Checkout Page (React) → localhost:3001
+│ ├── Fetch Order
+│ ├── Select Payment Method
+│ ├── Process Payment
+│ └── Poll Status
+│
+└── Backend API (Spring Boot) → localhost:8000
+├── Orders
+├── Payments
+└── Health
+
+---
+
 Built using:
 - Spring Boot (Backend API)
 - React (Dashboard + Checkout)
 - PostgreSQL
 - Redis
 - Docker & Docker Compose
+
 ## Setup Instructions
 
 ### Prerequisites
