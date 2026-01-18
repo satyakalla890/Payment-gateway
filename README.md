@@ -22,21 +22,37 @@ The project is split into:
 ## Architecture
 
 Browser
+
 ├── Dashboard (React) → localhost:3000
+
 │ ├── Health
+
 │ ├── Transactions
+
 │ └── Opens Checkout
+
 │
+
 ├── Checkout Page (React) → localhost:3001
+
 │ ├── Fetch Order
+
 │ ├── Select Payment Method
+
 │ ├── Process Payment
+
 │ └── Poll Status
+
 │
+
 └── Backend API (Spring Boot) → localhost:8000
+
 ├── Orders
+
 ├── Payments
+
 └── Health
+
 
 ---
 
